@@ -68,14 +68,17 @@ class MLC:
    def Ax_n_1(self,age,term):
       output=0
       for i in range(1,term+1):
-         qx_n_1=self.pn_x(age,age+i-1)*self.qx(age+i-1)
+         qx_n_1=self.pn_x(age,i-1)*self.qx(age+i-1)
 	 discount_factor=(1/(1+self.interest))**i
-         output=output+qx_n_1
-	# *discount_factor	       
+         output=output+qx_n_1*discount_factor	       
             
       return output
 
-
+   def ax_n(self,age,term):
+      if term==0:
+         return 1
+      else: 
+	 return (ax_n(self,age-1,term-1)-1)/(self.interest*self.pn_x(age-1,age))	 
 
 if __name__=="__main__":
    new_table=life_table_array()
