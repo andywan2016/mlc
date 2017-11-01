@@ -8,10 +8,10 @@ def simulation(mlc_obj,start_yr,yr_steps):
       rand_num=random.uniform(0,1)	   
       qx=mlc_obj.qx(start_yr+i)
       if rand_num<qx:
-         return [start_yr+i,'dead']
+         return {'age':start_yr+i,'status':'dead'}
       else:
 	 continue      
-   return [start_yr+yr_steps,'survive']
+   return {'age':start_yr+yr_steps,'status':'survive'}
    
 
 if __name__=='__main__':
