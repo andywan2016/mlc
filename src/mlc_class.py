@@ -93,22 +93,31 @@ class MLC:
 
 #Anuity, using recursive function      
    def ax_n(self,age,term):
-      if term==0:
-         return 1
-      else: 
-	 return (ax_n(self,age-1,term-1)-1)/(self.interest*self.pn_x(age-1,age))	 
+      return (1-self.Ax_n(age,term))/(self.interest/(1+self.interest))
+    
+    
+    # if term==0:
+      #   return 1
+      #else: 
+#	 return (self.ax_n(age-1,term+1)-1)/(self.interest*self.pn_x(age-1,age))	 
 
+   def net_p(self,age,term):
+      return self.Ax_n(age,term)/self.ax_n(age,term)
 
 
 #Below part are for testing 
 if __name__=="__main__":
    new_table=life_table_array()
-   print(new_table.table[1])
+  # print(new_table.table[1])
    #new_table.print_table()
    new_MLC=MLC(3,new_table)
-   print(new_MLC.dx(0))
-   print(new_MLC.qx(0))
-   print(new_MLC.pn_x(20,10))
-   print(new_MLC.Ax_n_1(20,25))
-   print(new_MLC.Ax_n(20,25)) 
+  # print(new_MLC.dx(0))
+  # print(new_MLC.qx(0))
+   #print(new_MLC.pn_x(20,10))
+   #print(new_MLC.Ax_n_1(20,25))
+   #print(new_MLC.Ax_n(20,25))
+   print("at age 40, 20 year endowment of $100,000 premium is: ")
+   print(1000000*new_MLC.net_p(40,20))
+
+
 
