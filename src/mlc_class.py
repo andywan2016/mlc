@@ -85,13 +85,13 @@ class MLC:
       return output
 
 #double the force of interest rate
-   def 2_Ax_n_1(self,age,term):
+   def Ax_n_1_2(self,age,term):
       output=0
       for i in range(1,term+1):
          qx_n_1=self.pn_x(age,i-1)*self.qx(age+i-1)
 	 discount_factor=(1/(1+2*self.interest))**i
 	 output=output+qx_n_1*discount_factor
-   return output	 
+      return output	 
 
 # Endowment Function(=Term Insurance + EPV)
    def Ax_n(self,age,term):
@@ -102,7 +102,7 @@ class MLC:
 
 #Anuity, using recursive function      
    def ax_n(self,age,term):
-      return (1-self.Ax_n(age,term))/(self.interest/(1+self.interest))
+      return (1-self.Ax_n_1(age,term))/(self.interest/(1+self.interest))
     
     
     # if term==0:
@@ -111,9 +111,22 @@ class MLC:
 #	 return (self.ax_n(age-1,term+1)-1)/(self.interest*self.pn_x(age-1,age))	 
 
    def net_p(self,age,term):
-      return self.Ax_n(age,term)/self.ax_n(age,term)
+      return self.Ax_n_1(age,term)/self.ax_n(age,term)
 
-   
+
+   def discount(self,year):
+      return 1/(1+self.interest)**year
+
+   def a_n(self,year):
+      return (1-self.discount(year))*(1+self.interest)/(self.interest)
+
+
+# the actual profit that when a case insuraed on age x and die in year t,with provided premiun
+   def actual_profit(self,insurance,premiun,year):
+      return premiun*self.a_n(year)-insurance*self.discount(year)
+      
+
+
 #Below part are for testing 
 if __name__=="__main__":
    new_table=life_table_array()
@@ -125,8 +138,8 @@ if __name__=="__main__":
    #print(new_MLC.pn_x(20,10))
    #print(new_MLC.Ax_n_1(20,25))
    #print(new_MLC.Ax_n(20,25))
-   print("at age 40, 20 year endowment of $100,000 premium is: ")
-   print(1000000*new_MLC.Ax_n_1(40,20)/new_MLC.ax_n(40,20))
+   print("at age 40, 20 year $100,000 term insurance premium is: ")
+   print(100000*new_MLC.Ax_n_1(40,20)/new_MLC.ax_n(40,20))
 
 
 
