@@ -122,9 +122,12 @@ class MLC:
 
 
 # the actual profit that when a case insuraed on age x and die in year t,with provided premiun
-   def actual_profit(self,insurance,premiun,year):
-      return premiun*self.a_n(year)-insurance*self.discount(year)
+   def actual_profit(self,insurance,premiun,year,status):
       
+      if status:      
+         return premiun*self.a_n(year)-insurance*self.discount(year)
+      else:
+	 return premiun*self.a_n(year)     
 
 
 #Below part are for testing 
@@ -133,13 +136,13 @@ if __name__=="__main__":
   # print(new_table.table[1])
    #new_table.print_table()
    new_MLC=MLC(3,new_table)
-  # print(new_MLC.dx(0))
-  # print(new_MLC.qx(0))
-   #print(new_MLC.pn_x(20,10))
-   #print(new_MLC.Ax_n_1(20,25))
    #print(new_MLC.Ax_n(20,25))
    #print("at age 40, 20 year $100,000 term insurance premium is: ")
    #print(100000*new_MLC.Ax_n_1(40,20)/new_MLC.ax_n(40,20))
-   print(new_MLC.discount(20))
-   print(new_MLC.a_n(20))
-
+  # print(new_MLC.discount(20))
+  # print(new_MLC.a_n(20))
+   #print(100000*new_MLC.net_p(79,20))
+   #print(new_MLC.pn_x(20,20))
+   #print(new_MLC.pn_x(79,10))
+   for i in range(20):
+      print(new_MLC.pn_x(40,i))	   
