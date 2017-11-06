@@ -138,8 +138,8 @@ if __name__=="__main__":
    #print(new_MLC.pn_x(20,10))
    #print(new_MLC.Ax_n_1(20,25))
    #print(new_MLC.Ax_n(20,25))
-   print("at age 40, 20 year $100,000 term insurance premium is: ")
-   print(100000*new_MLC.Ax_n_1(40,20)/new_MLC.ax_n(40,20))
-
-
+   #print("at age 40, 20 year $100,000 term insurance premium is: ")
+   #print(100000*new_MLC.Ax_n_1(40,20)/new_MLC.ax_n(40,20))
+   print(new_MLC.discount(20))
+   print(new_MLC.a_n(20))
 
